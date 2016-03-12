@@ -6,9 +6,9 @@ implicit none
     integer,parameter::LeData=999
     integer:: i,k,nstep,ns=20
     real*8 Y(nn),znorm(n),le(n)
-    real*8::tstart=0.0,stept=0.01,tend=1000,para=27,t,h
+    real*8::tstart=0.0,stept=0.01,tend=1000,para=27,t,subtpace
     nstep=(tend-tstart)/stept
-    h=stept/ns;t=tstart
+    subtpace=stept/ns;t=tstart
     Y(1)=10;Y(2)=1;Y(3)=0.0;
     do i=n+1,nn
         Y(i)=0.0
@@ -19,7 +19,7 @@ implicit none
     end do
     open(LeData,file='LE.txt')
 	do i=1,nstep
-		call ODE45(nn,ns,Y,para,t,h)
+		call ODE45(nn,ns,Y,para,t,subtpace)
 	    call ORTH(n,znorm,Y)
 		do k=1,n
 			le(k)=le(k)+log(znorm(k))
