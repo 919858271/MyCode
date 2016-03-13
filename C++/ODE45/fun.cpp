@@ -17,3 +17,4 @@ void fun(double *x,double *result,double t){
 	result[0] = x[1];
 	result[1] = -(pow(x[0],2)-1)*x[1]-x[0]+cos(temp);
 }
+
