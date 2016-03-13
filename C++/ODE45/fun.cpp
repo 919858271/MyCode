@@ -13,7 +13,6 @@
  */
 #include "fun.h"
 void fun(double *x,double *result,double t){
-/
 
 
 	double temp=t*sqrt(2.0);
