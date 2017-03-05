@@ -1,0 +1,19 @@
+﻿.mainindex{padding-top:0px; overflow:hidden;}
+.welinfo{height:32px; line-height:32px; padding-bottom:8px; background:url(../images/righttop.gif) repeat-x;}
+.welinfo span{float:left;}
+.welinfo b{padding-left:0px;}
+.welinfo a{padding-left:0px;color:#3186c8;}
+.welinfo a:hover{color:#F60;}
+.welinfo i{font-style:normal; padding-left:8px;}
+.xline{border-bottom:solid 1px #dfe9ee; height:5px;}
+
+.forminfo2{padding-left:23px;}
+.forminfo2 li{margin-bottom:13px; clear:both;}
+.forminfo2 li label{width:86px;line-height:34px; display:block; float:left;}
+.forminfo2 li i{color:#7f7f7f; padding-left:20px; font-style:normal;}
+.forminfo2 li cite{display:block; padding-top:10px;}
+.textinput2{margin-left:5px;border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; width:404px; height:32px; line-height:20px; overflow:hidden;}
+.dfinput{margin-left:5px;width:245px; height:32px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
+.btn2{margin-bottom:40xp;width:100px;height:32px; background:url("../images/btnbg.png") no-repeat; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;}
+.btn3{margin-bottom:40xp;width:88px;height:26px; background:url("../images/btn1.png") no-repeat; font-size:14px;font-weight:bold;color:black; cursor:pointer;}
+.btn4{width:100px;height:30px; background:url("../images/btn1.png") no-repeat; font-size:14px;font-weight:bold;color:black; cursor:pointer;}
