@@ -1,2 +1,0 @@
-C:\Users\jianwenxu\Desktop\我的平台 
-pyuic4 Chaos.ui -x -o Chaos.py
