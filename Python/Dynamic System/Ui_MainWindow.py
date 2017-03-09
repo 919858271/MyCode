@@ -1,0 +1,277 @@
+# -*- coding: utf-8 -*-
+#
+# Created: Mon Jan 30 15:39:57 2017
+#      by: PyQt4 UI code generator 4.11.3
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+
+
+class Ui_mainWindow(object):
+
+    def setupUi(self, mainWindow):
+        mainWindow.setObjectName(_fromUtf8("mainWindow"))
+        mainWindow.resize(800, 595)
+        # 禁止最大化按钮
+        mainWindow.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint)
+        # 禁止拉伸窗口大小
+        mainWindow.setFixedSize(mainWindow.width(), mainWindow.height())
+        self.centralwidget = QtGui.QWidget(mainWindow)
+        self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+        self.layoutWidget = QtGui.QWidget(self.centralwidget)
+        self.layoutWidget.setGeometry(QtCore.QRect(20, 10, 761, 511))
+        self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("plugins/favicon.ico")),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
+
+        self.horizontalLayout = QtGui.QHBoxLayout(self.layoutWidget)
+        self.horizontalLayout.setMargin(0)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.groupBox = QtGui.QGroupBox(self.layoutWidget)
+        self.groupBox.setObjectName(_fromUtf8("groupBox"))
+
+        self.groupBox_3 = QtGui.QGroupBox(self.groupBox)
+        self.groupBox_3.setGeometry(QtCore.QRect(10, 40, 351, 61))
+        self.groupBox_3.setObjectName(_fromUtf8("groupBox_3"))
+        self.systemSelect = QtGui.QComboBox(self.groupBox_3)
+        self.systemSelect.setGeometry(QtCore.QRect(17, 22, 171, 22))
+        self.systemSelect.setObjectName(_fromUtf8("systemSelect"))
+
+        self.reload = QtGui.QPushButton(self.groupBox_3)
+        self.reload.setGeometry(QtCore.QRect(230, 22, 85, 23))
+        self.reload.setObjectName(_fromUtf8("reload"))
+
+        self.groupBox_4 = QtGui.QGroupBox(self.groupBox)
+        self.groupBox_4.setGeometry(QtCore.QRect(10, 120, 351, 371))
+        self.groupBox_4.setObjectName(_fromUtf8("groupBox_4"))
+        self.funLabel = QtGui.QLabel(self.groupBox_4)
+        self.funLabel.setGeometry(QtCore.QRect(20, 20, 291, 291))
+        self.funLabel.setObjectName(_fromUtf8("funLabel"))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Times New Roman"))
+        font.setPointSize(14)
+        self.funLabel.setFont(font)
+        self.funLabel.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+        self.horizontalLayout.addWidget(self.groupBox)
+        self.groupBox_2 = QtGui.QGroupBox(self.layoutWidget)
+        self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
+        self.groupBox_5 = QtGui.QGroupBox(self.groupBox_2)
+        self.groupBox_5.setGeometry(QtCore.QRect(10, 40, 361, 91))
+        self.groupBox_5.setObjectName(_fromUtf8("groupBox_5"))
+        self.label = QtGui.QLabel(self.groupBox_5)
+        self.label.setGeometry(QtCore.QRect(10, 30, 54, 12))
+        self.label.setObjectName(_fromUtf8("label"))
+        self.label_2 = QtGui.QLabel(self.groupBox_5)
+        self.label_2.setGeometry(QtCore.QRect(188, 30, 54, 12))
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.label_3 = QtGui.QLabel(self.groupBox_5)
+        self.label_3.setGeometry(QtCore.QRect(10, 60, 54, 12))
+        self.label_3.setObjectName(_fromUtf8("label_3"))
+        self.lineEdit = QtGui.QLineEdit(self.groupBox_5)
+        self.lineEdit.setGeometry(QtCore.QRect(66, 26, 101, 20))
+        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
+        self.lineEdit_2 = QtGui.QLineEdit(self.groupBox_5)
+        self.lineEdit_2.setGeometry(QtCore.QRect(250, 25, 101, 20))
+        self.lineEdit_2.setObjectName(_fromUtf8("lineEdit_2"))
+        self.lineEdit_3 = QtGui.QLineEdit(self.groupBox_5)
+        self.lineEdit_3.setGeometry(QtCore.QRect(66, 60, 101, 20))
+        self.lineEdit_3.setObjectName(_fromUtf8("lineEdit_3"))
+        self.groupBox_6 = QtGui.QGroupBox(self.groupBox_2)
+        self.groupBox_6.setGeometry(QtCore.QRect(10, 150, 361, 91))
+        self.groupBox_6.setObjectName(_fromUtf8("groupBox_6"))
+        self.var1 = QtGui.QLabel(self.groupBox_6)
+        self.var1.setGeometry(QtCore.QRect(20, 30, 54, 12))
+        self.var1.setObjectName(_fromUtf8("var1"))
+        self.lineEdit_4 = QtGui.QLineEdit(self.groupBox_6)
+        self.lineEdit_4.setGeometry(QtCore.QRect(56, 26, 101, 20))
+        self.lineEdit_4.setObjectName(_fromUtf8("lineEdit_4"))
+        self.lineEdit_4.hide()
+        self.var1_2 = QtGui.QLabel(self.groupBox_6)
+        self.var1_2.setGeometry(QtCore.QRect(180, 30, 54, 12))
+        self.var1_2.setObjectName(_fromUtf8("var1_2"))
+        self.lineEdit_5 = QtGui.QLineEdit(self.groupBox_6)
+        self.lineEdit_5.setGeometry(QtCore.QRect(216, 26, 101, 20))
+        self.lineEdit_5.setObjectName(_fromUtf8("lineEdit_5"))
+        self.lineEdit_5.hide()
+        self.var1_3 = QtGui.QLabel(self.groupBox_6)
+        self.var1_3.setGeometry(QtCore.QRect(19, 64, 54, 12))
+        self.var1_3.setObjectName(_fromUtf8("var1_3"))
+        self.lineEdit_6 = QtGui.QLineEdit(self.groupBox_6)
+        self.lineEdit_6.setGeometry(QtCore.QRect(55, 60, 101, 20))
+        self.lineEdit_6.setObjectName(_fromUtf8("lineEdit_6"))
+        self.lineEdit_6.hide()
+#        self.var1_4 = QtGui.QLabel(self.groupBox_6)
+#        self.var1_4.setGeometry(QtCore.QRect(181, 60, 54, 12))
+#        self.var1_4.setObjectName(_fromUtf8("var1_4"))
+#        self.lineEdit_7 = QtGui.QLineEdit(self.groupBox_6)
+#        self.lineEdit_7.setGeometry(QtCore.QRect(217, 56, 101, 20))
+#        self.lineEdit_7.setObjectName(_fromUtf8("lineEdit_7"))
+#        self.lineEdit_7.hide()
+        self.groupBox_7 = QtGui.QGroupBox(self.groupBox_2)
+        self.groupBox_7.setGeometry(QtCore.QRect(10, 260, 351, 241))
+        self.groupBox_7.setObjectName(_fromUtf8("groupBox_7"))
+        self.groupBox_8 = QtGui.QGroupBox(self.groupBox_7)
+        self.groupBox_8.setGeometry(QtCore.QRect(10, 20, 331, 211))
+        self.groupBox_8.setTitle(_fromUtf8(""))
+        self.groupBox_8.setObjectName(_fromUtf8("groupBox_8"))
+        self.dataExport = QtGui.QPushButton(self.groupBox_8)
+        self.dataExport.setGeometry(QtCore.QRect(130, 30, 75, 23))
+        self.dataExport.setObjectName(_fromUtf8("dataExport"))
+        self.start = QtGui.QPushButton(self.groupBox_8)
+        self.start.setGeometry(QtCore.QRect(20, 30, 75, 23))
+        self.start.setObjectName(_fromUtf8("start"))
+        self.visual = QtGui.QPushButton(self.groupBox_8)
+        self.visual.setGeometry(QtCore.QRect(230, 30, 75, 23))
+        self.visual.setObjectName(_fromUtf8("visual"))
+        self.groupBox_9 = QtGui.QGroupBox(self.groupBox_8)
+        self.groupBox_9.setGeometry(QtCore.QRect(20, 80, 301, 81))
+        self.groupBox_9.setObjectName(_fromUtf8("groupBox_9"))
+        self.radioButton1 = QtGui.QRadioButton(self.groupBox_9)
+        self.radioButton1.setGeometry(QtCore.QRect(20, 20, 41, 16))
+        self.radioButton1.setObjectName(_fromUtf8("radioButton1"))
+        self.radioButton2 = QtGui.QRadioButton(self.groupBox_9)
+        self.radioButton2.setGeometry(QtCore.QRect(80, 20, 41, 16))
+        self.radioButton2.setObjectName(_fromUtf8("radioButton2"))
+        self.radioButton3 = QtGui.QRadioButton(self.groupBox_9)
+        self.radioButton3.setGeometry(QtCore.QRect(140, 20, 71, 16))
+        self.radioButton3.setObjectName(_fromUtf8("radioButton3"))
+        self.comboBox1 = QtGui.QComboBox(self.groupBox_9)
+        self.comboBox1.setGeometry(QtCore.QRect(70, 50, 51, 22))
+        self.comboBox1.setObjectName(_fromUtf8("comboBox1"))
+        self.comboBox2 = QtGui.QComboBox(self.groupBox_9)
+        self.comboBox2.setGeometry(QtCore.QRect(150, 50, 51, 22))
+        self.comboBox2.setObjectName(_fromUtf8("comboBox2"))
+        self.label_5 = QtGui.QLabel(self.groupBox_8)
+        self.label_5.setGeometry(QtCore.QRect(100, 170, 150, 16))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("SimSun-ExtB"))
+        font.setPointSize(9)
+        self.label_5.setFont(font)
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName(_fromUtf8("label_5"))
+        self.horizontalLayout.addWidget(self.groupBox_2)
+        self.label_4 = QtGui.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(170, 530, 501, 21))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("SimSun-ExtB"))
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_4.setFont(font)
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setObjectName(_fromUtf8("label_4"))
+        mainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtGui.QMenuBar(mainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 23))
+        self.menubar.setObjectName(_fromUtf8("menubar"))
+        self.fileMenu = self.menubar.addMenu(u"&系统")
+        self.selectFile = self.fileMenu.addAction(_fromUtf8("选择配置文件"))
+        self.selectFile.setObjectName(_fromUtf8("selectFile"))
+
+        self.reloadConfig = self.fileMenu.addAction(_fromUtf8("重载配置"))
+        self.reloadConfig.setObjectName(_fromUtf8("reloadConfig"))
+
+        self.about = self.fileMenu.addAction(_fromUtf8("关于"))
+        self.about.setObjectName(_fromUtf8("about"))
+        self.exitSystem = self.fileMenu.addAction(_fromUtf8("退出"))
+        self.exitSystem.setObjectName(_fromUtf8("exitSystem"))
+#        self.exitSystem.triggered.connect(self.close)
+        # 默认配置文件
+        self.sysConfig()
+
+        mainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtGui.QStatusBar(mainWindow)
+        self.statusbar.setObjectName(_fromUtf8("statusbar"))
+        mainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(mainWindow)
+        QtCore.QMetaObject.connectSlotsByName(mainWindow)
+
+    def retranslateUi(self, mainWindow):
+        mainWindow.setWindowTitle(_translate("mainWindow", "动力系统仿真平台", None))
+        self.groupBox.setTitle(_translate("mainWindow", "控制面板", None))
+        self.groupBox_3.setTitle(_translate("mainWindow", "仿真系统", None))
+        self.groupBox_4.setTitle(_translate("mainWindow", "系统方程", None))
+        self.groupBox_2.setTitle(_translate("mainWindow", "参数控制", None))
+        self.groupBox_5.setTitle(_translate("mainWindow", "时间", None))
+        self.label.setText(_translate("mainWindow", "开始时间", None))
+        self.label_2.setText(_translate("mainWindow", "结束时间", None))
+        self.label_3.setText(_translate("mainWindow", "时间步长", None))
+        self.groupBox_6.setTitle(_translate("mainWindow", "初始值", None))
+        self.groupBox_7.setTitle(_translate("mainWindow", "仿真控制", None))
+        self.dataExport.setText(_translate("mainWindow", "数据导出", None))
+        self.start.setText(_translate("mainWindow", "开 始", None))
+        self.reload.setText(_translate("mainWindow", "重新加载配置", None))
+        self.visual.setText(_translate("mainWindow", "作  图", None))
+        self.groupBox_9.setTitle(_translate("mainWindow", "作图控制", None))
+        self.radioButton1.setText(_translate("mainWindow", "3D", None))
+        self.radioButton2.setText(_translate("mainWindow", "2D", None))
+        self.radioButton3.setText(_translate("mainWindow", "时间序列", None))
+        self.label_4.setText(_translate("mainWindow", "动力系统仿真平台 西北工业大学", None))
+        self.groupBox_2.hide()
+        self.comboBox1.hide()
+        self.comboBox2.hide()
+        self.dataExport.hide()
+        self.visual.hide()
+        self.groupBox_9.hide()
+        self.radioButton1.hide()
+        self.radioButton2.hide()
+        self.radioButton3.hide()
+        self.reload.hide()
+
+    # 加载系统配置
+    def sysConfig(self):
+        self.groupBox.show()
+        self.label_4.show()
+        defaultConfig = self.defaultConfig
+        sectionList = list(defaultConfig)
+        self.systemSelect.clear()
+        self.systemSelect.addItem(_fromUtf8(""))
+        self.systemSelect.setItemText(0, _translate("MainForm", "请选择", None))
+        if len(sectionList) != 0:
+            lens = len(sectionList)
+            for i in range(1, lens + 1):
+                self.systemSelect.addItem(_fromUtf8(""))
+                self.systemSelect.setItemText(
+                    i, _translate("MainForm", sectionList[i - 1], None))
+        else:
+            self.groupBox.hide()
+            self.groupBox_2.hide()
+            self.label_4.hide()
+            self.mesg = QtGui.QMessageBox()
+            self.mesg.setWindowTitle(u'系统消息')
+            self.mesg.setWindowIcon(QtGui.QIcon(
+                QtGui.QPixmap("plugins/favicon.ico")))
+            self.mesg.setIconPixmap(QtGui.QPixmap("plugins/favicon.ico"))
+            #QtGui.QMessageBox.warning( self, u"系统消息", u"配置文件不存在\n请选择配置文件")
+            self.mesg.setText(u"配置文件不存在\n请选择配置文件")
+            self.mesg.show()
+
+#
+# if __name__ == "__main__":
+#    import sys
+#    app = QtGui.QApplication(sys.argv)
+#    mainWindow = QtGui.QMainWindow()
+#    ui = Ui_mainWindow()
+#    ui.setupUi(mainWindow)
+#    mainWindow.show()
+#    sys.exit(app.exec_())
