@@ -1,0 +1,140 @@
+%\setlength{\baselineskip}{20pt}
+\linespread{1.5}
+\bibliographystyle{setup/GB7714}
+\setlength{\bibsep}{0.0ex}
+%\numberwithin{equation}{chapter}
+\renewcommand{\theequation}{\thechapter-\arabic{equation}}
+\newdateformat{cdate}{\THEYEAR~年~\THEMONTH~月 }%中文日期显示格式
+\newdateformat{edate}{\monthname[\THEMONTH],~\THEYEAR}%英文日期显示格式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 重定义字体 字号命令
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\song}{\CJKfamily{song}}    % 宋体   (Windows自带simsun.ttf)
+\newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体 (Windows自带simfs.ttf)
+\newcommand{\kai}{\CJKfamily{kai}}      % 楷体   (Windows自带simkai.ttf)
+\newcommand{\hei}{\CJKfamily{hei}}      % 黑体   (Windows自带simhei.ttf)
+\newcommand{\li}{\CJKfamily{li}}        % 隶书   (Windows自带simli.ttf)
+\newcommand{\yihao}{\fontsize{26pt}{26pt}\selectfont}       % 一号, 1.倍行距
+\newcommand{\xiaoyi}{\fontsize{24pt}{24pt}\selectfont}      % 小一, 1.倍行距
+\newcommand{\erhao}{\fontsize{22pt}{22pt}\selectfont}       % 二号, 1.倍行距
+\newcommand{\xiaoer}{\fontsize{18pt}{18pt}\selectfont}      % 小二, 单倍行距
+\newcommand{\sanhao}{\fontsize{16pt}{16pt}\selectfont}      % 三号, 1.倍行距
+\newcommand{\xiaosan}{\fontsize{15pt}{15pt}\selectfont}     % 小三, 1.倍行距
+\newcommand{\sihao}{\fontsize{14pt}{14pt}\selectfont}       % 四号, 1.0倍行距
+\newcommand{\banxiaosi}{\fontsize{13pt}{13pt}\selectfont}   % 半小四, 1.0倍行距
+\newcommand{\xiaosi}{\fontsize{12pt}{12pt}\selectfont}      % 小四, 1.倍行距
+\newcommand{\dawuhao}{\fontsize{11.5pt}{11.5pt}\selectfont} % 大五号, 单倍行距
+\newcommand{\wuhao}{\fontsize{10.5pt}{10.5pt}\selectfont}   % 五号, 单倍行距
+\newcommand{\xiaowu}{\fontsize{9.5pt}{9.5pt}\selectfont}    % 五号, 单倍行距
+
+\newcommand{\banbanxiaosi}{\fontsize{12pt}{12pt}\selectfont}% 半半小四, 1.0 倍行距
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 页眉样式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fancypagestyle{plain}{
+  \pagestyle{fancy}
+}
+\newcommand{\makeheadrule}{%
+\makebox[-3pt][l]{\rule[.76\baselineskip]{\headwidth}{0.4pt}}
+\rule[0.85\baselineskip]{\headwidth}{2.35pt}\vskip-.8\baselineskip}
+\renewcommand{\headrule}{%
+    {\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi
+     \makeheadrule}}
+\pagestyle{fancyplain}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{\xiaowu\song{第\chinese{chapter} 章}}{}}
+\fancyhead[CO]{ }
+\fancyhead[LO]{ }
+\fancyhead[CE]{\xiaowu\song{西北工业大学硕士学位论文}}
+\fancyfoot[C,C]{\xiaowu{\thepage}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 目录样式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\contentsname}{{\sanhao\hei目~~录}}
+\CTEXsetup[name={第,章},number={\chinese{chapter}}]{chapter}
+\CTEXsetup[number={\thesection}]{section}
+\CTEXsetup[number={\thesubsection}]{subsection}
+%tocloft和ctexcap标题重叠现象
+\makeatletter
+\renewcommand{\numberline}[1]{%
+\settowidth\@tempdimb{#1\hspace{0.5em}}%
+\ifdim\@tempdima<\@tempdimb%
+  \@tempdima=\@tempdimb%
+\fi%
+\hb@xt@\@tempdima{\@cftbsnum #1\@cftasnum\hfil}\@cftasnumb}
+\makeatother
+%tocloft和ctexcap标题重叠现象
+\titlecontents{chapter}[0mm]
+%{\vspace{.2\baselineskip}\bf}
+{\vspace{.01\baselineskip}}
+{{\thecontentslabel}\hspace{0.1em}} {}
+{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
+[\vspace{.01\baselineskip}]
+\titlecontents{section}[18pt]
+{\vspace{.01\baselineskip}}
+{{\thecontentslabel}\hspace{0.6em}} {}
+{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
+[\vspace{.01\baselineskip}]
+\titlecontents{subsection}[40pt]
+{\vspace{.01\baselineskip}}
+{{\thecontentslabel}\hspace{0.6em}}{}
+{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
+[\vspace{.01\baselineskip}]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 标题样式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titleformat{\chapter}[block]{\centering\sanhao\hei}{第\chaptername章}{1em}{}
+\titleformat{\section}[hang]{\hei\sihao}{\sihao\hei\thesection}{0.5em}{}
+\titleformat{\subsection}[hang]{\hei\xiaosi}{\xiaosi\hei\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}[hang]{\hei\xiaosi}{\xiaosi\hei\thesubsubsection}{0.5em}{}
+\titlespacing{\chapter}{0pt}{0mm}{3mm}
+\titlespacing{\section}{0pt}{1.5mm}{1.5mm}
+\titlespacing{\subsection}{0pt}{1.5mm}{1.5mm}
+%\titlespacing{\subsubsection}{0pt}{1.5mm}{1.5mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 公式，图表，定理
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand\refname{参考文献}
+\renewcommand{\figurename}{图}
+\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
+\renewcommand{\tablename}{表}
+\renewcommand{\thetable}{\thechapter-\arabic{table}}
+\newtheorem{Proof}{证明}[chapter]
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{lemma}{引理}[chapter]
+\newtheorem{remark}{注记}[chapter]
+\newtheorem{definition}{定义}[chapter]
+\newtheorem{proposition}{命题}[chapter]
+\def\propositionautorefname{命题}
+\def\theoremautorefname{定理}
+\def\lemmaautorefname{引理}
+\def\definitionautorefname{定义}
+\def\remarkautorefname{注记}
+\def\figureautorefname{图}
+\def\subfigureautorefname{图}
+\def\tableautorefname{表}
+\crefname{equation}{方程}{方程}
+\crefname{table}{表}{表}
+\crefname{figure}{图}{图}
+\captionsetup[figure]{labelsep=space}
+\captionsetup[table]{labelsep=space}
+\newcommand{\upcite}[1]{\textsuperscript{{\cite{#1}}}}
+
+
+%表格样式
+\newlength\savedwidth
+\newcommand\whline{\noalign{\global\savedwidth\arrayrulewidth
+                            \global\arrayrulewidth 1.2pt}
+                   \hline
+                   \noalign{\global\arrayrulewidth\savedwidth}}
+\newlength\savewidth
+\newcommand\shline{\noalign{\global\savewidth\arrayrulewidth
+                            \global\arrayrulewidth 1.2pt}
+                   \hline
+                   \noalign{\global\arrayrulewidth\savewidth}}
+%===================== 自动断字设置 =====================%
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=100000
+\hbadness=100000
