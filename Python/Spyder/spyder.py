@@ -22,7 +22,7 @@ def get_html(url):
 
 
 def get_ip_items(html):
-    return BeautifulSoup(html, "html.parser").findAll(ip_tag)[1:]
+    return BeautifulSoup(html, "html.parser").findAll(ip_tag)
 
 
 def get_ip_type(ip):
@@ -33,7 +33,7 @@ def get_ip_type(ip):
 
 def get_ips(ip_items):
     ips = []
-    for ip in ip_items:
+    for ip in ip_items[1:]:
         ip = ip.text.split()
         ips.append({'ip_type': get_ip_type(ip), 'ip': ip[0], 'port': ip[1]})
     return ips
