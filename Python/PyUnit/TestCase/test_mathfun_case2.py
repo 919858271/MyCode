@@ -5,7 +5,7 @@
 #-------------------------------------------------------------------------------
 
 import unittest as ut
-from Alpha.mathfun import *
+from Alpha import mathfun
 
 
 class TestMathFun(ut.TestCase):
@@ -28,23 +28,23 @@ class TestMathFun(ut.TestCase):
     def test_add(self):
         '''Test method add(a,b)'''
         print('Test_add')
-        self.assertEqual(3, add(1, 2))
-        self.assertNotEqual(2, add(1, 2))
+        self.assertEqual(3, mathfun.add(1, 2))
+        self.assertNotEqual(2, mathfun.add(1, 2))
 
     def test_minus(self):
         '''Test method minus(a,b)'''
         print('Test_minus')
-        self.assertEqual(1, minus(2, 1))
-        self.assertNotEqual(2, minus(2, 2))
+        self.assertEqual(1, mathfun.minus(2, 1))
+        self.assertNotEqual(2, mathfun.minus(2, 2))
 
     def test_multi(self):
         '''Test method multi(a,b)'''
         print('Test_multi')
-        self.assertEqual(1, multi(1, 1))
-        self.assertNotEqual(2, multi(1, 1))
+        self.assertEqual(1, mathfun.multi(1, 1))
+        self.assertNotEqual(2, mathfun.multi(1, 1))
 
     def test_divide(self):
         '''Test method divide(a,b)'''
         print('Test_divide')
-        self.assertEqual(2.0, divide(2, 1))
-        self.assertNotEqual(2, divide(2, 2))
+        self.assertEqual(2.0, mathfun.divide(2, 1))
+        self.assertNotEqual(2, mathfun.divide(2, 2))
