@@ -5,7 +5,7 @@
 #-------------------------------------------------------------------------------
 import unittest as ut
 from unittest import mock
-from Alpha import client
+from PyUnit.Alpha import client
 
 
 class TestClient(ut.TestCase):

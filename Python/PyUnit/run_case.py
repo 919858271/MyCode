@@ -7,13 +7,8 @@ import os
 import sys
 import time
 import unittest as ut
-from ThirdParty.HTMLTestRunner import HTMLTestRunner
-
-TEST_CASE_PATH = '/TestCase/'
-REPORT_PATH = '/TestCaseReport/'
-FILE_PREFIX = 'TestCaseReport_'
-FILE_SUFFIX = '.html'
-TEST_CASE_PATTERN = 'test*.py'
+from PyUnit.ThirdParty.HTMLTestRunner import HTMLTestRunner
+from PyUnit.Config.config import *
 
 main_path = os.path.split(os.path.abspath(sys.argv[0]))[0]
 test_case_path = (main_path + TEST_CASE_PATH).replace('\\', '/')
