@@ -7,11 +7,12 @@ import os
 import sys
 import time
 import unittest as ut
+from ThirdParty.HTMLTestRunner import HTMLTestRunner
 
 TEST_CASE_PATH = '/TestCase/'
 REPORT_PATH = '/TestCaseReport/'
 FILE_PREFIX = 'TestCaseReport_'
-FILE_SUFFIX = '.txt'
+FILE_SUFFIX = '.html'
 TEST_CASE_PATTERN = 'test*.py'
 
 main_path = os.path.split(os.path.abspath(sys.argv[0]))[0]
@@ -39,7 +40,8 @@ class RunTestCases(object):
 
     def run(self):
         with open(report_file_name, 'w') as f:
-            runner = ut.TextTestRunner(stream=f, verbosity=2)
+            runner = HTMLTestRunner(
+                stream=f, verbosity=2, title='Test for unittest')
             runner.run(self.suite)
 
 
