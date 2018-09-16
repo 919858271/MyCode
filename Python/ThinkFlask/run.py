@@ -5,13 +5,12 @@
 # Email:       npujianwenxu@163.com
 #-------------------------------------------------------------------------------
 from flask import Flask, render_template, url_for, redirect
-from home.views.index import home_index
-from admin.views.index import admin_index
 
 app = Flask(__name__)
+app.config.from_object('common.config.config')
 
-app.register_blueprint(home_index, url_prefix='/home/')
-app.register_blueprint(admin_index, url_prefix='/admin/')
+for url in app.config['URL']:
+    app.register_blueprint(url['url'], url_prefix=url['url_prefix'])
 
 
 @app.route('/')
@@ -24,4 +23,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=app.config['DEBUG'])

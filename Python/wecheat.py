@@ -30,7 +30,7 @@ def send_news():
     my_friend = bot.friends().search(u'Favorite')[0]
     my_friend.send(contents[0])
     my_friend.send(contents[1])
-    my_friend.send(u"晚上好呀!")
+    my_friend.send(u"又到周末了")
     #t = Timer(2, send_news)
     #t.start()
 
