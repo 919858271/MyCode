@@ -11,7 +11,7 @@ url = u'http://www.xicidaili.com/nn/'
 
 MyDB = MongoDB(DB_CONFIG)
 n = 3369
-for i in range(1396, n + 1):
+for i in range(1697, n + 1):
     t_url = url + str(i)
     print('getting ' + t_url)
     ips = ip_spyder(t_url)
