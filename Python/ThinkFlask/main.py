@@ -4,14 +4,11 @@
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
 #-------------------------------------------------------------------------------
-from flask import Flask, url_for, redirect
-from common.config import BaseConfig, URLConfig
-
-app = Flask(__name__)
-app.config.from_object(BaseConfig)
-
-for url in URLConfig.URL:
-    app.register_blueprint(url['url'], url_prefix=url['url_prefix'])
+from flask import url_for, redirect
+from common.setting import *
+from home.model import models as home
+from admin.model import models as admin
+from common import urls
 
 
 @app.route('/')

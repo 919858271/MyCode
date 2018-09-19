@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
-from flask_sqlalchemy import SQLAlchemy
-from main import app
-
-db = SQLAlchemy(app)
+from common.setting import db
 
 
 class User(db.Model):
