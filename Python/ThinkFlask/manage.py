@@ -21,7 +21,7 @@ manager.add_command(
 @manager.shell
 def make_shell_context():
     '''
-    make sure Flask app object imported，otherwise the  app object not in the started CLI
+    make sure Flask app object imported, otherwise the  app object not in the started CLI
     '''
     return dict(app=app, db=db)
 
