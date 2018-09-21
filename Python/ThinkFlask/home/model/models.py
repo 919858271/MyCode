@@ -2,19 +2,24 @@
 # -*- coding: utf-8 -*-
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
-from app.setting import db
+from app import db
 
 
 class User(db.Model):
     """Represents Proected users."""
 
-    id = db.Column(db.String(45), primary_key=True)
-    username = db.Column(db.String(255))
-    password = db.Column(db.String(255))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(
+        db.String(255),
+        unique=True,
+        nullable=False,
+    )
+    password = db.Column(
+        db.String(255),
+        nullable=False,
+    )
 
-    def __init__(self, username):
-        self.username = username
-
-    def __repr__(self):
-        """Define the string format for instance of User."""
-        return "<Model User `{}`>".format(self.username)
+    # @property
+    # def save(self):
+    #     db.session.add(self.__class__.__name__)
+    #     db.session.commit()

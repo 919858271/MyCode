@@ -6,5 +6,5 @@ from app.setting import app
 from home.views.index import home_index
 from admin.views.index import admin_index
 
-app.register_blueprint(home_index, url_prefix='/home/')
+app.register_blueprint(home_index, url_prefix='/')
 app.register_blueprint(admin_index, url_prefix='/admin/')
