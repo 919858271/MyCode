@@ -3,7 +3,7 @@
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
 
-from app.setting import db
+from app.models import db
 
 
 class Admin(db.Model):

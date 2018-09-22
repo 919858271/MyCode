@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
-from app import db
-from home.model import models as home
-from admin.model import models as admin
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
 
 class Model(object):

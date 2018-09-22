@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
-from app import db
+from app.models import db
 
 
 class User(db.Model):
@@ -18,8 +18,3 @@ class User(db.Model):
         db.String(255),
         nullable=False,
     )
-
-    # @property
-    # def save(self):
-    #     db.session.add(self.__class__.__name__)
-    #     db.session.commit()

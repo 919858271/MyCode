@@ -5,7 +5,7 @@
 # Email:       npujianwenxu@163.com
 #-------------------------------------------------------------------------------
 from flask import Blueprint, render_template
-from app import Model
+from app.models import Model
 from home.model.models import User
 
 home_index = Blueprint('home_index', __name__)
