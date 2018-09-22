@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
-# home
-from home.urls import home_router
-from home.model import models
-from home.views import index
+# home url
+from flask import Blueprint
+home_router = Blueprint('home_router', __name__)

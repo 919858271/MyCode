@@ -1,10 +1,17 @@
 
+# !/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Author:      jianwen
+# Email:       npujianwenxu@163.com
+# app
+
 from werkzeug.utils import import_string
 from flask import Flask
+from app.urls import blueprints
 from app import config
 from app.models import db
-from app.urls import blueprints
-
+import home
+import admin
 
 class App():
     def __init__(self):
