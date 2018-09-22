@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
-from home.views.index import home_index
-from admin.views.index import admin_index
-
-blueprints = [{
-    'url': home_index,
-    'url_prefix': '/'
-}, {
-    'url': admin_index,
-    'url_prefix': '/admin/'
-}]
+blueprints = [
+        {
+            'url': 'home.views.index:home_index',
+            'url_prefix': '/'
+        },
+        {
+            'url': 'admin.views.index:admin_index',
+            'url_prefix': '/admin/'
+        }
+    ]

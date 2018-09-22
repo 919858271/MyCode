@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
-
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 DEBUG = True
 HOST = '127.0.0.1'
 PORT = 5000

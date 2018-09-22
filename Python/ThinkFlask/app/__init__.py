@@ -1,9 +1,9 @@
+
+from werkzeug.utils import import_string
 from flask import Flask
 from app import config
-from app.urls import blueprints
 from app.models import db
-from home.model import models as home
-from admin.model import models as admin
+from app.urls import blueprints
 
 
 class App():
@@ -16,4 +16,5 @@ class App():
 
     def create_blueprints(self, blueprints):
         for bp in blueprints:
-            self.app.register_blueprint(bp['url'], url_prefix=bp['url_prefix'])
+            self.app.register_blueprint(
+                import_string(bp['url']), url_prefix=bp['url_prefix'])
