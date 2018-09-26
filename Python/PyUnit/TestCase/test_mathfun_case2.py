@@ -5,7 +5,7 @@
 #-------------------------------------------------------------------------------
 
 import unittest as ut
-from PyUnit.Alpha import mathfun
+from Alpha import mathfun
 
 
 class TestMathFun(ut.TestCase):
