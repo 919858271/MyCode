@@ -18,3 +18,7 @@ class User(db.Model):
         db.String(255),
         nullable=False,
     )
+    @staticmethod
+    def insert(user):
+        db.session.add(user)
+        db.session.commit()

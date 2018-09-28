@@ -18,7 +18,7 @@ def index():
 @home_router.route('/add/<username>/<password>/')
 def add_user(username, password):
     user = User(username=username, password=password)
-    Model.save(user)
+    User.insert(user)
     return 'success'
 
 
