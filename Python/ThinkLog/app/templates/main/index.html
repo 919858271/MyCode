@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Basic Layout - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', filename='easyui/themes/default/easyui.css')}}>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', filename='easyui/themes/icon.css')}}>
+    <script type="text/javascript" src={{url_for('static', filename='easyui/jquery.min.js')}}></script>
+    <script type="text/javascript" src={{url_for('static', filename='easyui/jquery.easyui.min.js')}}></script>
+</head>
+
+<body class="easyui-layout">
+    <div data-options="region:'north',border:false" style="height:45px;background:#B3DFDA;padding:10px">
+        Log在线透视系统
+    </div>
+    <div data-options="region:'west',split:true,title:'Log'" style="width:150px;padding:10px;">
+
+        <ul class="easyui-tree">
+            <li>
+                <span>IP:{{user_ip}}</span>
+                <ul>
+                    {% if user_has_logs %}
+                    {% for key,values in log.items() %}
+                    <li data-options="state:'closed'">
+                        <span>{{key}}</span>
+                        <ul>
+                            {% for v in values%}
+                            <li>
+                                <a href="javascript:void(0)" onclick="show_log('{{v}}')"">{{v}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                    <li>
+                        <a href="
+                                    javascript:void(0)" onclick="$('#dlg').dialog('open')">Log加载</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+    </div>
+    <div data-options="region:'east',split:true,collapsed:false,title:'透视选项'" style="width:200px;padding:10px;">
+        <p>选项1</p>
+        <select id="state" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
+            <option value="0">选择数据</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+
+        </select>
+        <p>选项2</p>
+        <select class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
+            <option value="0">选择数据</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+
+        </select>
+        <p>选项3</p>
+        <select class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
+            <option value="0">选择数据</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+
+        </select>
+        <p>选项4</p>
+        <select class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
+            <option value="0">选择数据</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+
+        </select>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="alert($('#state').combobox('getValues'))">GetValue</a>
+    </div>
+    {% if user_has_logs%}
+    <div id="dlg" class="easyui-dialog" title="Log加载" data-options="closed:true" style="width:40%;height:200px;padding:10px">
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div>
+                <select id="log_type" class="easyui-combobox" name="log_type" style="width:30%;">
+                    <option value="0">选择Log类型</option>
+                    {% for type in log_type %}
+                    <option value="{{type.key}}">{{type.value}}</option>
+                    {% endfor %}
+                </select>
+                <input id="log_file" class="easyui-filebox" name="file" style="width:69%" data-options="prompt:'仅支持CVS文件'">
+            </div>
+            <div>
+                <a href="#" class="easyui-linkbutton" style="width:100%;margin-top:20px" onclick="upload()">Upload</a>
+            </div>
+            <div id="p" class="easyui-progressbar" style="width:100%;;margin-top:20px"></div>
+        </form>
+    </div>
+    {% else %}
+    <div id="dlg" class="easyui-dialog" title="Log加载" data-options="closed:false" style="width:40%;height:200px;padding:10px">
+        <form id="uploadForm" enctype="multipart/form-data">
+
+            <div>
+                <select id="log_type" class="easyui-combobox" name="log_type" style="width:30%;">
+                    <option value="0">选择Log类型</option>
+                    {% for type in log_type %}
+                    <option value="{{type.key}}">{{type.value}}</option>
+                    {% endfor %}
+                </select>
+                <input id="log_file" class="easyui-filebox" name="file" style="width:69%" data-options="prompt:'仅支持CVS文件'">
+            </div>
+            <div>
+                <a href="#" class="easyui-linkbutton" style="width:100%;margin-top:20px" onclick="upload()">Upload</a>
+            </div>
+            <div id="p" class="easyui-progressbar" style="width:100%;;margin-top:20px"></div>
+        </form>
+    </div>
+    {% endif %}
+    <div id="content" data-options=" region:'center',title:'Log数据'">
+        {% if user_has_logs%}
+        <table id="table" class="easyui-datagrid" style="width:99.9%;height:508%" iconCls="icon-save" rownumbers="true"
+            pagination="true">
+            <thead>
+                <tr></tr>
+            </thead>
+        </table>
+        {% endif %}
+    </div>
+</body>
+<script>
+    function upload() {
+        var formData = new FormData($('#uploadForm')[0]);
+        if ($('#log_type').combobox('getValues') != 0) {
+            if ($('#log_file').filebox('getValue').length > 0) {
+                $.ajax(
+                    {
+                        url: "{{ url_for('main.upload_file')}}",
+                        type: "POST",
+                        data: formData,
+                        async: true,
+                        cashe: false,
+                        contentType: false,
+                        processData: false,
+                        xhr: function () {
+                            myXhr = $.ajaxSettings.xhr();
+                            if (myXhr.upload) {
+                                myXhr.upload.addEventListener('progress', function (e) {
+                                    var per = Math.floor(100 * e.loaded / e.total);
+                                    $('#p').progressbar('setValue', per);
+                                }, false);
+                            }
+                            return myXhr;
+                        },
+                        success: function (returndata) {
+                            $.messager.alert('Log加载', returndata);
+                            $('#log_file').filebox('setValue', " ");
+                            $('#dlg').dialog('close');
+                        },
+                        error: function (returndata) {
+                            $.messager.alert('Log加载', returndata);
+                            $('#log_file').filebox('setValue', " ");
+                            $('#dlg').dialog('close');
+                        },
+                    },
+
+                );
+            }
+            else {
+                $.messager.alert('Log加载', "请选择log文件");
+            }
+        }
+        else {
+            $.messager.alert('Log加载', "请选择log类型");
+        }
+
+    }
+</script>
+<script>
+    function show_log(params) {
+        //通过ajax请求生成的新的datagrid的列名
+        $.ajax({
+            url: "/show/", //获取列名后台接口
+            type: "GET",
+            dataType: 'json',
+            queryParams: { params },
+            data: { table: table },
+            rownumbers: true, //行号
+            pagination: true, //分页控件
+            pageSize: 20,
+            pageList: [10, 20, 30, 50, 100, 150, 200, 300, 500],
+            success: function (data) {
+                //获取表头数据成功后，使用easyUi的datagrid去生成表格
+                $('#' + table).datagrid({
+                    url: "/show/", //获取数据后台接口
+                    method: "GET",
+                    contentType: "application/json",
+                    columns: data,//外层ajax请求的表头json
+                    queryParams: { params },
+                    rownumbers: true, //行号
+                    pagination: true, //分页控件
+                    pageSize: 20,
+                    pageList: [10, 20, 30, 50, 100, 150, 200, 300, 500],
+                    striped: true,
+                    loadMsg: "正在努力加载数据,表格渲染中...",
+                    onLoadSuccess: function (data) {
+                        console.log(data);
+                        if (data == null) {
+                            //自定义页面信息加载框
+                            msgShow("error", "请求数据为空!", 'warning');
+                        }
+                    },
+                });
+            },
+            error: function (e) {
+                msgShow("error", "请求数据出错!", 'error');
+            }
+        });
+    }
+
+
+</script>
+
+</html>
