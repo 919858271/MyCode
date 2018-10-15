@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Basic Layout - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', filename='easyui/themes/default/easyui.css')}}>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', filename='easyui/themes/icon.css')}}>
+    <script type="text/javascript" src={{url_for('static', filename='easyui/jquery.min.js')}}></script>
+    <script type="text/javascript" src={{url_for('static', filename='easyui/jquery.easyui.min.js')}}></script>
+</head>
+
+<body class="easyui-layout">
+
+    <table id="dg" class="easyui-datagrid" style="width:99.9%;height:58%" iconCls="icon-save" rownumbers="true"
+        pagination="true" data-options="
+rownumbers:true,
+singleSelect:true,
+autoRowHeight:false,
+pagination:true">
+        <thead>
+            <tr></tr>
+        </thead>
+    </table>
+
+
+</body>
+
+<script type="text/javascript">
+    $(function () {
+        //动态加载标题和数据
+        //fLoadTable();
+        $.ajax({
+            url: "/test/",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#dg").datagrid({
+                    columns: [data.title]    //动态取标题
+                });
+
+                $("#dg").datagrid("loadData", data.rows);  //动态取数据
+            }
+        });
+    });
+</script>
+
+</html>

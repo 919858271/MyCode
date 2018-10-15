@@ -8,7 +8,8 @@
 import os
 import time
 import csv
-from flask import render_template, request
+import json
+from flask import render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from app.models import MongoDB
 from app.config import DefaultConfig, MongoDBConfig, UPLOAD_PATH, LOG_TYPE
@@ -114,3 +115,27 @@ def show_log(db_table):
     itmes = list(dateset[0].keys())
     itmes.pop(0)
     return '1'
+
+
+@main.route('/test2/')
+def test2():
+    return render_template('main/test.html', )
+
+
+@main.route('/test/')
+def test():
+    datas = {}
+    db_name = 'log_' + str(request.remote_addr).replace('.', '_')
+    mdb = mongoDB.client[db_name]
+    log = mdb['autolog_1539522298']
+
+    cursor = log.find({}, {'_id': 0}).limit(50)
+
+    datas['total'] = cursor.count()
+    datas['rows'] = list(cursor)
+    items = list(datas['rows'][0].keys())
+    titles = []
+    for item in items:
+        titles.append({'field': item, 'title': item})
+    datas['title'] = titles
+    return json.dumps(datas)
