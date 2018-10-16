@@ -3,11 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Basic Layout - jQuery EasyUI Demo</title>
+    <title>LOG在线透视</title>
     <link rel="stylesheet" type="text/css" href={{url_for('static', filename='easyui/themes/default/easyui.css')}}>
     <link rel="stylesheet" type="text/css" href={{url_for('static', filename='easyui/themes/icon.css')}}>
     <script type="text/javascript" src={{url_for('static', filename='easyui/jquery.min.js')}}></script>
     <script type="text/javascript" src={{url_for('static', filename='easyui/jquery.easyui.min.js')}}></script>
+    <script type="text/javascript" src={{url_for('static', filename='easyui/datagrid-bufferview.js')}}></script>
+    <script type="text/javascript" src={{url_for('static', filename='easyui/datagrid-filter.js')}}></script>
 </head>
 
 <body class="easyui-layout">
@@ -27,7 +29,7 @@
                         <ul>
                             {% for v in values%}
                             <li>
-                                <a href="/test/" onclick="show_log('{{v}}')"">{{v}}</a>
+                                <a href="javascript:void(0)" onclick="show('{{v}}')"">{{v}}</a>
                             </li>
                             {% endfor %}
                         </ul>
@@ -113,8 +115,7 @@
     {% endif %}
     <div id="content" data-options=" region:'center',title:'Log数据'">
         {% if user_has_logs%}
-        <table id="table" class="easyui-datagrid" style="width:99.9%;height:508%" iconCls="icon-save" rownumbers="true"
-            pagination="true">
+        <table id="log_table" style="width:99.9%;height:100%" data-options="view:bufferview,rownumbers:true,singleSelect:false,autoRowHeight:false">
             <thead>
                 <tr></tr>
             </thead>
@@ -211,8 +212,38 @@
             }
         });
     }
+</script>
+<script>
+    function ajaxLoading() {
+        $("<div class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", height: $(window).height() }).appendTo("body");
+        $("<div class=\"datagrid-mask-msg\"></div>").html("数据加载中，请稍候...").appendTo("body").css({ display: "block", left: ($(document.body).outerWidth(true) - 190) / 2, top: ($(window).height() - 45) / 2 });
+    }
+</script>
+<script>
+    function ajaxLoadEnd() {
+        $(".datagrid-mask").remove();
+        $(".datagrid-mask-msg").remove();
+    }
+</script>
+<script type="text/javascript">
+    function show(para) {
+        //动态加载标题和数据
+        //fLoadTable();
+        $.ajax({
+            url: "/show/" + para,
+            type: "get",
+            dataType: "json",
+            beforeSend: ajaxLoading,
+            success: function (data) {
+                $("#log_table").datagrid({
+                    columns: [data.title]    //动态取标题
+                });
+                $("#log_table").datagrid("loadData", data.rows);  //动态取数据
+                ajaxLoadEnd();
 
-
+            }
+        });
+    }
 </script>
 
 </html>

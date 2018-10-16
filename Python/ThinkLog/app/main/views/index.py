@@ -107,6 +107,25 @@ def upload_file():
 
 
 @main.route('/show/<db_table>')
+def show(db_table):
+    datas = {}
+    db_name = 'log_' + str(request.remote_addr).replace('.', '_')
+    mdb = mongoDB.client[db_name]
+    log = mdb[db_table]
+
+    cursor = log.find({}, {'_id': 0})  #.limit(50)
+
+    datas['total'] = cursor.count()
+    datas['rows'] = list(cursor)
+    items = list(datas['rows'][0].keys())
+    titles = []
+    for item in items:
+        titles.append({'field': item, 'title': item, 'width': 100})
+    datas['title'] = titles
+    return json.dumps(datas)
+
+
+@main.route('/show2/<db_table>')
 def show_log(db_table):
     db_name = 'log_' + str(request.remote_addr).replace('.', '_')
     mdb = mongoDB.client[db_name]
