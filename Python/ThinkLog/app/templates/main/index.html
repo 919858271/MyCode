@@ -46,34 +46,18 @@
     </div>
     <div data-options="region:'east',split:true,collapsed:false,title:'透视选项'" style="width:200px;padding:10px;">
         <p>选项1</p>
-        <select id="state" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
-            <option value="0">选择数据</option>
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-
+        <select id="select1" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
         </select>
         <p>选项2</p>
-        <select class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
-            <option value="0">选择数据</option>
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-
+        <select id="select2" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
         </select>
         <p>选项3</p>
-        <select class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
-            <option value="0">选择数据</option>
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-
+        <select id="select3" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
         </select>
         <p>选项4</p>
-        <select class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
-            <option value="0">选择数据</option>
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-
+        <select id="select4" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
         </select>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="alert($('#state').combobox('getValues'))">GetValue</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="alert($('#select1').combobox('getValues'))">GetValue</a>
     </div>
     {% if user_has_logs%}
     <div id="dlg" class="easyui-dialog" title="Log加载" data-options="closed:true" style="width:40%;height:200px;padding:10px">
@@ -171,48 +155,7 @@
 
     }
 </script>
-<script>
-    function show_log(params) {
-        //通过ajax请求生成的新的datagrid的列名
-        $.ajax({
-            url: "/show/", //获取列名后台接口
-            type: "GET",
-            dataType: 'json',
-            queryParams: { params },
-            data: { table: table },
-            rownumbers: true, //行号
-            pagination: true, //分页控件
-            pageSize: 20,
-            pageList: [10, 20, 30, 50, 100, 150, 200, 300, 500],
-            success: function (data) {
-                //获取表头数据成功后，使用easyUi的datagrid去生成表格
-                $('#' + table).datagrid({
-                    url: "/show/", //获取数据后台接口
-                    method: "GET",
-                    contentType: "application/json",
-                    columns: data,//外层ajax请求的表头json
-                    queryParams: { params },
-                    rownumbers: true, //行号
-                    pagination: true, //分页控件
-                    pageSize: 20,
-                    pageList: [10, 20, 30, 50, 100, 150, 200, 300, 500],
-                    striped: true,
-                    loadMsg: "正在努力加载数据,表格渲染中...",
-                    onLoadSuccess: function (data) {
-                        console.log(data);
-                        if (data == null) {
-                            //自定义页面信息加载框
-                            msgShow("error", "请求数据为空!", 'warning');
-                        }
-                    },
-                });
-            },
-            error: function (e) {
-                msgShow("error", "请求数据出错!", 'error');
-            }
-        });
-    }
-</script>
+
 <script>
     function ajaxLoading() {
         $("<div class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", height: $(window).height() }).appendTo("body");
@@ -230,7 +173,7 @@
         //动态加载标题和数据
         //fLoadTable();
         $.ajax({
-            url: "/show/" + para,
+            url: "/home/show/" + para,
             type: "get",
             dataType: "json",
             beforeSend: ajaxLoading,
@@ -239,6 +182,23 @@
                     columns: [data.title]    //动态取标题
                 });
                 $("#log_table").datagrid("loadData", data.rows);  //动态取数据
+
+                var datas = [];
+                $("#select1").combobox('clear');
+                $("#select2").combobox('clear');
+                $("#select3").combobox('clear');
+                $("#select4").combobox('clear');
+
+                for (var i = 0; i < data.selections.length; i++) {
+                    var value = data.selections[i].id;
+                    var text = data.selections[i].text;
+                    datas.push({ "text": text, "value": value });
+                }
+                $("#select1").combobox("loadData", datas);
+                $("#select2").combobox("loadData", datas);
+                $("#select3").combobox("loadData", datas);
+                $("#select4").combobox("loadData", datas);
+
                 ajaxLoadEnd();
 
             }

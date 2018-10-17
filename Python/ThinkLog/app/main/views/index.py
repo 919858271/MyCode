@@ -119,9 +119,12 @@ def show(db_table):
     datas['rows'] = list(cursor)
     items = list(datas['rows'][0].keys())
     titles = []
+    selections = []
     for item in items:
         titles.append({'field': item, 'title': item, 'width': 100})
+        selections.append({'id': item, 'text': item})
     datas['title'] = titles
+    datas['selections'] = selections
     return json.dumps(datas)
 
 

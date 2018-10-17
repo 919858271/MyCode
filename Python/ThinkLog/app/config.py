@@ -29,4 +29,4 @@ class MongoDBConfig:
 
 
 class URLConfig:
-    blueprints = [{'url': 'app.main:main', 'url_prefix': '/'}]
+    blueprints = [{'url': 'app.main:main', 'url_prefix': '/home'}]
