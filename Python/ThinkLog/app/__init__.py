@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
-
+import os
 from werkzeug.utils import import_string
 from flask import Flask
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 from app.config.config import DB, BLUEPRINTS
 import app.main
 

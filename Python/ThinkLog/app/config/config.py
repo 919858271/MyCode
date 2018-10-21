@@ -2,12 +2,11 @@
 # -*- coding: utf-8 -*-
 # Author:      jianwen
 # Email:       npujianwenxu@163.com
-import os
+
 from flask_sqlalchemy import SQLAlchemy
+from app import ROOT_PATH
 from .mongodb import MongoDB
 
-#ROOT
-ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 # upload
 UPLOAD_PATH = ROOT_PATH.replace('\\', '/') + '/static/uploads'
 ALLOWED_EXTENSIONS = set(['csv'])
