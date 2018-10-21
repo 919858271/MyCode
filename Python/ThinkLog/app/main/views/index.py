@@ -8,20 +8,16 @@
 import os
 import time
 import csv
-import json
 from flask import render_template, request, jsonify
 from werkzeug.utils import secure_filename
-from app.models import MongoDB
-from app.config import DefaultConfig, MongoDBConfig, UPLOAD_PATH, LOG_TYPE
+from app.config.config import MONGODB, ALLOWED_EXTENSIONS, UPLOAD_PATH, LOG_TYPE
 from .. import main
-
-mongoDB = MongoDB(MongoDBConfig.DB_CONFIG)
 
 
 def has_log_for_current_ip(db_name):
-    dblist = mongoDB.client.list_database_names()
+    dblist = MONGODB.client.list_database_names()
     if db_name in dblist:
-        mdb = mongoDB.client[db_name]
+        mdb = MONGODB.client[db_name]
         if len(mdb.list_collection_names()) > 0:
             return True
         else:
@@ -43,7 +39,7 @@ def get_log_tables_type(tables):
 @main.route('/')
 def index():
     db_name = 'log_' + str(request.remote_addr).replace('.', '_')
-    tables = mongoDB.client[db_name].list_collection_names()
+    tables = MONGODB.client[db_name].list_collection_names()
     log = get_log_tables_type(tables)
     return render_template(
         'main/index.html',
@@ -55,7 +51,7 @@ def index():
 
 def file_is_allowed(filename):
     return '.' in filename and filename.rsplit(
-        '.', 1)[1].lower() in DefaultConfig.ALLOWED_EXTENSIONS
+        '.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def get_data_from_csv(file_path):
@@ -67,7 +63,7 @@ def get_data_from_csv(file_path):
 def save_data_to_db(log_file_path, log_type, db_name):
 
     table_name = log_type + '_' + str(int(time.time()))
-    mdb = mongoDB.client[db_name]
+    mdb = MONGODB.client[db_name]
     table = mdb[table_name]
     data = get_data_from_csv(log_file_path)
     items = data[0]
@@ -110,7 +106,7 @@ def upload_file():
 def show(db_table):
     datas = {}
     db_name = 'log_' + str(request.remote_addr).replace('.', '_')
-    mdb = mongoDB.client[db_name]
+    mdb = MONGODB.client[db_name]
     log = mdb[db_table]
 
     cursor = log.find({}, {'_id': 0})  #.limit(50)
@@ -125,39 +121,4 @@ def show(db_table):
         selections.append({'id': item, 'text': item})
     datas['title'] = titles
     datas['selections'] = selections
-    return json.dumps(datas)
-
-
-@main.route('/show2/<db_table>')
-def show_log(db_table):
-    db_name = 'log_' + str(request.remote_addr).replace('.', '_')
-    mdb = mongoDB.client[db_name]
-    log = mdb[db_table]
-    dateset = log.find()
-    itmes = list(dateset[0].keys())
-    itmes.pop(0)
-    return '1'
-
-
-@main.route('/test2/')
-def test2():
-    return render_template('main/test.html', )
-
-
-@main.route('/test/')
-def test():
-    datas = {}
-    db_name = 'log_' + str(request.remote_addr).replace('.', '_')
-    mdb = mongoDB.client[db_name]
-    log = mdb['autolog_1539522298']
-
-    cursor = log.find({}, {'_id': 0}).limit(50)
-
-    datas['total'] = cursor.count()
-    datas['rows'] = list(cursor)
-    items = list(datas['rows'][0].keys())
-    titles = []
-    for item in items:
-        titles.append({'field': item, 'title': item})
-    datas['title'] = titles
-    return json.dumps(datas)
+    return jsonify(datas)

@@ -4,9 +4,7 @@
 # Email:       npujianwenxu@163.com
 # models.py
 
-from flask_sqlalchemy import SQLAlchemy
 import pymongo as pm
-db = SQLAlchemy()
 
 
 class MongoDB:
