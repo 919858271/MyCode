@@ -45,19 +45,19 @@
                 </ul>
     </div>
     <div data-options="region:'east',split:true,collapsed:false,title:'透视选项'" style="width:200px;padding:10px;">
-        <p>选项1</p>
-        <select id="select1" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
+        <p>筛选器</p>
+        <select id="data_filter" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
         </select>
-        <p>选项2</p>
-        <select id="select2" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
+        <p>列</p>
+        <select id="data_column" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
         </select>
-        <p>选项3</p>
-        <select id="select3" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
+        <p>行</p>
+        <select id="data_row" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
         </select>
-        <p>选项4</p>
-        <select id="select4" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
+        <p>值</p>
+        <select id="data_value" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%">
         </select>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="alert($('#select1').combobox('getValues'))">GetValue</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="plot()">GetValue</a>
     </div>
     {% if user_has_logs%}
     <div id="dlg" class="easyui-dialog" title="Log加载" data-options="closed:true" style="width:40%;height:200px;padding:10px">
@@ -184,25 +184,47 @@
                 $("#log_table").datagrid("loadData", data.rows);  //动态取数据
 
                 var datas = [];
-                $("#select1").combobox('clear');
-                $("#select2").combobox('clear');
-                $("#select3").combobox('clear');
-                $("#select4").combobox('clear');
+                $("#data_filter").combobox('clear');
+                $("#data_column").combobox('clear');
+                $("#data_row").combobox('clear');
+                $("#data_value").combobox('clear');
 
                 for (var i = 0; i < data.selections.length; i++) {
                     var value = data.selections[i].id;
                     var text = data.selections[i].text;
                     datas.push({ "text": text, "value": value });
                 }
-                $("#select1").combobox("loadData", datas);
-                $("#select2").combobox("loadData", datas);
-                $("#select3").combobox("loadData", datas);
-                $("#select4").combobox("loadData", datas);
+                $("#data_filter").combobox("loadData", datas);
+                $("#data_column").combobox("loadData", datas);
+                $("#data_row").combobox("loadData", datas);
+                $("#data_value").combobox("loadData", datas);
 
                 ajaxLoadEnd();
 
             }
         });
+    }
+</script>
+<script>
+    function plot() {
+        $.ajax(
+            {
+                type: 'POST',
+                url: '/home/plot/',
+                data: JSON.stringify({
+                    "data_filter": $('#data_filter').combobox('getValues'),
+                    "data_column": $('#data_column').combobox('getValues'),
+                    "data_row": $('#data_row').combobox('getValues'),
+                    "data_value": $('#data_value').combobox('getValues')
+                }),
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (data) {
+                    alert(data);
+                },
+            }
+        );
     }
 </script>
 

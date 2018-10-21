@@ -6,6 +6,7 @@
 # main index
 #-------------------------------------------------------------------------------
 import os
+import json
 from flask import render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from app.config.config import MONGODB, UPLOAD_PATH, LOG_TYPE
@@ -75,3 +76,11 @@ def show(db_table):
     datas['title'] = titles
     datas['selections'] = selections
     return jsonify(datas)
+
+
+@main.route('/plot/', methods=['POST'])
+def plot():
+    if request.method == 'POST':
+        json_data = json.loads(request.get_data().decode("utf-8"))
+        print(json_data)
+        return "OK"
