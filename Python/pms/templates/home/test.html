@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+
+{% block top %}
+<div data-options="region:'north',border:false" style="height:45px;background:#B3DFDA;padding:10px">
+        PMS过程管理系统
+</div>
+{% endblock %}
+
+<body class="easyui-layout">
+    
+    <div data-options="region:'west',split:true,title:'过程管理'" style="width:250px;padding:10px;">
+        <ul class="easyui-tree">
+            <li>
+                <span>工程过程</span>
+                <ul>
+                    <li data-options="state:'closed'">
+                        <span>需求过程</span>
+                        <ul>                          
+                            <li>
+                                <a href="{% url 'home:detial' 2015201893 %}" target="mainFrame"><span>XXX需求过程</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <span>建模过程</span>
+                <ul>
+                    <li data-options="state:'closed'">
+                        <span>分析过程</span>
+                        <ul>                          
+                            <li>
+                                <span>XXX分析过程</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- <div data-options="region:'east',split:true,collapsed:false,title:'透视选项'" style="width:200px;padding:10px;"> -->
+        <!-- <p>筛选器</p> -->
+        <!-- <select id="data_filter" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%"> -->
+        <!-- </select> -->
+        <!-- <p>列</p> -->
+        <!-- <select id="data_column" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%"> -->
+        <!-- </select> -->
+        <!-- <p>行</p> -->
+        <!-- <select id="data_row" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%"> -->
+        <!-- </select> -->
+        <!-- <p>值</p> -->
+        <!-- <select id="data_value" class="easyui-combobox" name="state" data-options="multiple:true,multiline:true" style="width:98%;height:15%"> -->
+        <!-- </select> -->
+        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="plot()">GetValue</a> -->
+    <!-- </div> -->
+    {% if user_has_logs%}
+    <div id="dlg" class="easyui-dialog" title="Log加载" data-options="closed:true" style="width:40%;height:200px;padding:10px">
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div>
+                <select id="log_type" class="easyui-combobox" name="log_type" style="width:30%;">
+                    <option value="0">选择Log类型</option>
+                    {% for type in log_type %}
+                    <option value="{{type.key}}">{{type.value}}</option>
+                    {% endfor %}
+                </select>
+                <input id="log_file" class="easyui-filebox" name="file" style="width:69%" data-options="prompt:'仅支持CVS文件'">
+            </div>
+            <div>
+                <a href="#" class="easyui-linkbutton" style="width:100%;margin-top:20px" onclick="upload()">Upload</a>
+            </div>
+            <div id="p" class="easyui-progressbar" style="width:100%;;margin-top:20px"></div>
+        </form>
+    </div>
+    {% else %}
+    <!-- <div id="dlg" class="easyui-dialog" title="Log加载" data-options="closed:false" style="width:40%;height:200px;padding:10px"> -->
+        <!-- <form id="uploadForm" enctype="multipart/form-data"> -->
+
+            <!-- <div> -->
+                <!-- <select id="log_type" class="easyui-combobox" name="log_type" style="width:30%;"> -->
+                    <!-- <option value="0">选择Log类型</option> -->
+                    <!-- {% for type in log_type %} -->
+                    <!-- <option value="{{type.key}}">{{type.value}}</option> -->
+                    <!-- {% endfor %} -->
+                <!-- </select> -->
+                <!-- <input id="log_file" class="easyui-filebox" name="file" style="width:69%" data-options="prompt:'仅支持CVS文件'"> -->
+            <!-- </div> -->
+            <!-- <div> -->
+                <!-- <a href="#" class="easyui-linkbutton" style="width:100%;margin-top:20px" onclick="upload()">Upload</a> -->
+            <!-- </div> -->
+            <!-- <div id="p" class="easyui-progressbar" style="width:100%;;margin-top:20px"></div> -->
+        <!-- </form> -->
+    <!-- </div> -->
+    {% endif %}
+    
+    <div id="content" data-options=" region:'center',title:'过程可视化'">
+        <iframe name="mainFrame" scrolling="auto" frameborder="0" >
+                {% if user_has_logs%}
+                <table id="log_table" style="width:99.9%;height:100%" data-options="view:bufferview,rownumbers:true,singleSelect:false,autoRowHeight:false">
+                    <thead>
+                        <tr></tr>
+                    </thead>
+                </table>
+                {% endif %}
+        </iframe>
+    </div>
+</body>
+<script>
+    function upload() {
+        var formData = new FormData($('#uploadForm')[0]);
+        if ($('#log_type').combobox('getValues') != 0) {
+            if ($('#log_file').filebox('getValue').length > 0) {
+                $.ajax(
+                    {
+                        url: "",
+                        type: "POST",
+                        data: formData,
+                        async: true,
+                        cashe: false,
+                        contentType: false,
+                        processData: false,
+                        xhr: function () {
+                            myXhr = $.ajaxSettings.xhr();
+                            if (myXhr.upload) {
+                                myXhr.upload.addEventListener('progress', function (e) {
+                                    var per = Math.floor(100 * e.loaded / e.total);
+                                    $('#p').progressbar('setValue', per);
+                                }, false);
+                            }
+                            return myXhr;
+                        },
+                        success: function (returndata) {
+                            $.messager.alert('Log加载', returndata);
+                            $('#log_file').filebox('setValue', " ");
+                            $('#dlg').dialog('close');
+                        },
+                        error: function (returndata) {
+                            $.messager.alert('Log加载', returndata);
+                            $('#log_file').filebox('setValue', " ");
+                            $('#dlg').dialog('close');
+                        },
+                    },
+
+                );
+            }
+            else {
+                $.messager.alert('Log加载', "请选择log文件");
+            }
+        }
+        else {
+            $.messager.alert('Log加载', "请选择log类型");
+        }
+
+    }
+</script>
+
+<script>
+    function ajaxLoading() {
+        $("<div class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", height: $(window).height() }).appendTo("body");
+        $("<div class=\"datagrid-mask-msg\"></div>").html("数据加载中，请稍候...").appendTo("body").css({ display: "block", left: ($(document.body).outerWidth(true) - 190) / 2, top: ($(window).height() - 45) / 2 });
+    }
+</script>
+<script>
+    function ajaxLoadEnd() {
+        $(".datagrid-mask").remove();
+        $(".datagrid-mask-msg").remove();
+    }
+</script>
+<script type="text/javascript">
+    function show(para) {
+        //动态加载标题和数据
+        //fLoadTable();
+        $.ajax({
+            url: "/home/show/" + para,
+            type: "get",
+            dataType: "json",
+            beforeSend: ajaxLoading,
+            success: function (data) {
+                $("#log_table").datagrid({
+                    columns: [data.title]    //动态取标题
+                });
+                $("#log_table").datagrid("loadData", data.rows);  //动态取数据
+
+                var datas = [];
+                $("#data_filter").combobox('clear');
+                $("#data_column").combobox('clear');
+                $("#data_row").combobox('clear');
+                $("#data_value").combobox('clear');
+
+                for (var i = 0; i < data.selections.length; i++) {
+                    var value = data.selections[i].id;
+                    var text = data.selections[i].text;
+                    datas.push({ "text": text, "value": value });
+                }
+                $("#data_filter").combobox("loadData", datas);
+                $("#data_column").combobox("loadData", datas);
+                $("#data_row").combobox("loadData", datas);
+                $("#data_value").combobox("loadData", datas);
+
+                ajaxLoadEnd();
+
+            }
+        });
+    }
+</script>
+<script>
+    function plot() {
+        $.ajax(
+            {
+                type: 'POST',
+                url: '/home/plot/',
+                data: JSON.stringify({
+                    "data_filter": $('#data_filter').combobox('getValues'),
+                    "data_column": $('#data_column').combobox('getValues'),
+                    "data_row": $('#data_row').combobox('getValues'),
+                    "data_value": $('#data_value').combobox('getValues')
+                }),
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (data) {
+                    alert(data);
+                },
+            }
+        );
+    }
+</script>
+
+</html>

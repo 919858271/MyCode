@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>过程管理系统</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" href="{% static 'images/icon.png' %}" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'easyui/themes/default/easyui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'easyui/themes/icon.css' %}">
+    <script type="text/javascript" src="{% static 'easyui/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'easyui/jquery.easyui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'easyui/datagrid-bufferview.js' %}"></script>
+    <script type="text/javascript" src="{% static 'easyui/datagrid-filter.js' %}"></script>
+    <style type="text/css">
+        *{font-size:12px; font-family:Tahoma,Verdana,微软雅黑,新宋体}
+        
+        .accordion .accordion-header-selected {
+                background:rgb(231, 240, 255)
+                }
+        .tree-node-selected{
+            background:rgb(231, 240, 255)
+        }
+        a{color:Black; text-decoration:none;}
+        a:link,a:visited{
+         text-decoration:none;  
+         color:rgb(12, 12, 12);
+         
+        }
+    </style>
+
+</head>
+
+<body class="easyui-layout" >
+    {% block top %}     
+    {% endblock %}
+
+    {% block left_menu %}  
+    {% endblock%}
+
+    {% block center %}
+    {% endblock%} 
+
+    {% block right %}
+    {% endblock%}
+
+</body>
+
+</html>

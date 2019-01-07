@@ -1,0 +1,76 @@
+{% extends "home/base.html" %}
+{% load staticfiles %}
+{% block top %}
+    <div data-options="region:'north',border:false" style="height:38px;background: #7f99be;padding:6px;" >
+        <span style="float:right; padding-right:20px;color: #fff; font-family: Verdana, 微软雅黑,黑体"" class="head">欢迎 xxx<a href="#" id="editpass"  style="color: #fff; font-family: Verdana, 微软雅黑,黑体"> 修改密码</a> <a href="#" id="loginOut" style="color: #fff; font-family: Verdana, 微软雅黑,黑体">安全退出</a></span>
+
+<span style="padding-left:10px; font-size: 18px; color: #fff; font-family: Verdana, 微软雅黑,黑体"><img src="{% static 'images/icon.png' %}" width="20" height="20" align="absmiddle"/>PMS管理系统</span>
+    </div>
+    
+{% endblock %}
+
+{% block left_menu %}
+    <div data-options="region:'west',split:true,title:'系统菜单'" style="width:250px;">
+        <div id="accordion" class="easyui-accordion" data-options="fillSpace:true,fit: true,border: false,animate: true,selected:false">
+                <div title="需求管理" data-options="iconCls:'icon-requirement'">
+                        <ul class="easyui-tree">
+                                <li data-options="iconCls:'icon-man',state:'closed'">
+                                    <span >工程过程</span>
+                                    <ul>
+                                        <li data-options="iconCls:'icon-add',state:'closed'">
+                                            <span>需求过程</span>
+                                            <ul>                          
+                                                <li>
+                                                    <a href="{% url 'home:detial' 2015201893 %}" target="mainFrame"><span>XXX需求过程</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                        </ul>   
+                </div>
+                <div title="过程管理" data-options="iconCls:'icon-department'">
+                        <ul class="easyui-tree">
+                                <li data-options="iconCls:'icon-man',state:'closed'">
+                                    <span >工程过程</span>
+                                    <ul>
+                                        <li data-options="iconCls:'icon-add',state:'closed'">
+                                            <span>需求过程</span>
+                                            <ul>                          
+                                                <li>
+                                                    <a href="{% url 'home:detial' 2015201893 %}" target="mainFrame"><span>XXX需求过程</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                        </ul>   
+                </div>
+                <div title="系统管理" data-options="iconCls:'icon-sys'">
+                        <ul class="easyui-tree">
+                            <li data-options="iconCls:'icon-user'">
+                                    <a href="{% url 'home:detial' 2015201893 %}" target="mainFrame"><span>&nbsp;</span> <span>用户管理</span></a>
+                            </li>
+                            <li data-options="iconCls:'icon-role'">
+                                    <a href="{% url 'home:detial' 2015201893 %}" target="mainFrame"><span>&nbsp;</span><span>角色管理</span></a>
+                            </li>
+                            <li data-options="iconCls:'icon-hammer'">
+                                    <a href="{% url 'home:detial' 2015201893 %}" target="mainFrame"><span>&nbsp;</span><span>权限管理</span></a>
+                            </li>
+                            <li data-options="iconCls:'icon-log'">
+                                    <a href="{% url 'home:detial' 2015201893 %}" target="mainFrame"><span>&nbsp;</span><span>系统日志</span></a>
+                            </li>
+                        </ul>   
+                </div>
+               
+                
+            </div>
+    </div>
+{% endblock%}
+    
+{% block center %}
+    <div id="content" data-options=" region:'center',title:'状态栏'">
+            <iframe name="mainFrame" scrolling="auto" frameborder="0" style="width:100%">
+            </iframe>
+    </div>
+{% endblock%}
