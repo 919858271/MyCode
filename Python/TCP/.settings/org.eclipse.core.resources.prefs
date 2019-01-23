@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//client/client.py=utf-8
+encoding//log/client_log.py=utf-8
+encoding//log/server_log.py=utf-8
+encoding//server/server.py=utf-8
+encoding/__init__.py=utf-8
+encoding/start_client.py=utf-8
+encoding/start_server.py=utf-8
