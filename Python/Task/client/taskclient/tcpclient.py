@@ -32,5 +32,5 @@ class Tcpclient():
             self.client.sendall(bytes(send_data, encoding="utf8"))
             if send_data == "byebye":
                 break
-            accept_data = str(self.client.recv(1024), encoding="utf8")
+            accept_data = str(self.client.recv(1024), encoding="gbk")
             print("".join(("接收内容：", accept_data)))
