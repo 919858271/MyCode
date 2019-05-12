@@ -1,6 +1,6 @@
-2019/01/23 22:46:59 - INFO - Thread[7556] - function __init__() in file:server.py @lineno 17 runing.
-2019/01/23 22:46:59 - INFO - Thread[7556] - function __get_local_host() in file:server.py @lineno 23 runing.
-2019/01/23 22:46:59 - INFO - Thread[7556] - function __get_local_host() in file:server.py @lineno 23 done.
-2019/01/23 22:46:59 - INFO - Thread[7556] - function __bind_host() in file:server.py @lineno 30 runing.
-2019/01/23 22:46:59 - INFO - Thread[7556] - function __bind_host() in file:server.py @lineno 30 done.
-2019/01/23 22:46:59 - INFO - Thread[7556] - function __start_server() in file:server.py @lineno 37 runing.
+2019/05/12 16:01:02 - INFO - Thread[6280] - function __init__() in file:server.py @lineno 17 runing.
+2019/05/12 16:01:02 - INFO - Thread[6280] - function __get_local_host() in file:server.py @lineno 23 runing.
+2019/05/12 16:01:02 - INFO - Thread[6280] - function __get_local_host() in file:server.py @lineno 23 done.
+2019/05/12 16:01:02 - INFO - Thread[6280] - function __bind_host() in file:server.py @lineno 30 runing.
+2019/05/12 16:01:02 - INFO - Thread[6280] - function __bind_host() in file:server.py @lineno 30 done.
+2019/05/12 16:01:02 - INFO - Thread[6280] - function __start_server() in file:server.py @lineno 37 runing.
